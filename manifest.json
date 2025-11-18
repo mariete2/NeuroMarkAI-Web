@@ -1,0 +1,41 @@
+{
+  "name": "NeuroMarkAI - Agencia Especializada en IA",
+  "short_name": "NeuroMarkAI",
+  "description": "Agencia especializada en implementar soluciones de inteligencia artificial para impulsar el crecimiento empresarial.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f23",
+  "theme_color": "#5B21B6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "categories": [
+    "business",
+    "technology",
+    "marketing",
+    "ai"
+  ],
+  "lang": "es",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}

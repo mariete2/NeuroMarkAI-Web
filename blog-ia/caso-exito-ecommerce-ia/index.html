@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Y METADATOS -->
+    <title>E-commerce + IA: Un 40% Más de Ventas | NeuroMarkAI</title>
+    <meta name="description" content="Casos de éxito: Descubre cómo NeuroMarkAI implementó una solución de IA para una tienda online, logrando un 40% más de ventas y optimizando cada paso del funnel de conversión.">
+    <meta name="keywords" content="caso exito ecommerce, ia para ecommerce, automatizacion ventas, neuroMarkAI, aumento de conversiones">
+    <meta name="author" content="NeuroMarkAI">
+    <meta name="robots" content="index, follow">
+    
+    <!-- ENLACES CANÓNICOS -->
+    <link rel="canonical" href="https://neuromarkai.com/blog-ia/caso-exito-ecommerce-ia/">
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ESTILOS -->
+    <style>
+        :root {
+            --primary: #5B21B6; /* Morado oscuro */
+            --primary-dark: #4C1D95;
+            --primary-light: #7C3AED;
+            --secondary: #1E40AF; /* Azul oscuro */
+            --secondary-dark: #1E3A8A;
+            --secondary-light: #3B82F6;
+            --accent: #F59E0B;
+            --bg-dark: #0f0f23;
+            --bg-darker: #050514;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --bg-card-hover: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(91, 33, 182, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(30, 64, 175, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: bgPulse 25s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 15, 35, 0.7);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+            -webkit-backdrop-filter: blur(30px);
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 15, 35, 0.98);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-bottom: 1px solid rgba(91, 33, 182, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 50%, var(--secondary) 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 0 20px rgba(91, 33, 182, 0.5));
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 50%, var(--secondary) 50%);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary) 50%, var(--secondary) 50%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(91, 33, 182, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: 0;
+        }
+
+        .nav-cta:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(91, 33, 182, 0.6);
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .mobile-menu:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+        
+        /* ARTICLE STYLES */
+        .article-header {
+            background: var(--bg-darker);
+            padding: 8rem 0 3rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 50%, var(--secondary) 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .article-main {
+            padding: 4rem 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 3rem 0 1.5rem 0;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .article-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 50%, var(--secondary) 50%);
+            border-radius: 2px;
+        }
+        
+        .article-content h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: var(--primary-light);
+        }
+
+        .article-content ul {
+            margin: 1.5rem 0 1.5rem 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .article-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .results-highlight {
+            background: linear-gradient(135deg, var(--primary) 50%, var(--secondary) 50%);
+            color: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .results-highlight h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .result-item {
+            text-align: center;
+        }
+
+        .result-item .stat {
+            font-size: 2.5rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1;
+        }
+
+        .result-item .description {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .testimonial {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-secondary);
+            backdrop-filter: blur(10px);
+        }
+        
+        .cta-mid-article, .cta-end-article {
+            display: block;
+            text-align: center;
+            margin: 2.5rem 0;
+        }
+
+        .cta-mid-article .nav-cta, .cta-end-article .nav-cta {
+            font-size: 1.1rem;
+            padding: 1.25rem 2.5rem;
+            margin: 0 auto;
+        }
+
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            margin: 3rem 0;
+            padding: 1rem 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-to-blog:hover {
+            background: var(--bg-card-hover);
+            transform: translateX(-5px);
+        }
+        
+        /* FOOTER */
+        .footer {
+            background: var(--bg-darker);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0 1.5rem;
+            margin-top: 5rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--primary) 50%, var(--secondary) 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-section p,
+        .footer-section ul {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+            transition: var(--transition);
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-section a:hover::after {
+            width: 100%;
+        }
+
+        .footer-section li:hover {
+            transform: translateX(8px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(15, 15, 35, 0.98);
+                backdrop-filter: blur(30px);
+                -webkit-backdrop-filter: blur(30px);
+                padding: 2rem 1.5rem;
+                border-bottom: 1px solid var(--border);
+                gap: 1.5rem;
+                animation: slideDown 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .article-header {
+                padding: 6rem 0 2rem;
+            }
+            .article-main {
+                padding: 2rem 0;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Navegación principal">
+        <div class="container">
+            <div class="nav-container">
+                <a href="../../index.html" class="logo" aria-label="NeuroMarkAI - Ir al inicio">
+                    <i class="fas fa-brain" aria-hidden="true"></i>
+                    NeuroMarkAI
+                </a>
+
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="../../index.html#servicios" class="nav-transition">Soluciones IA</a></li>
+                    <li><a href="../../index.html#testimonios" class="nav-transition">Casos de Éxito</a></li>
+                    <li><a href="../../index.html#contacto" class="nav-transition">Contacto</a></li>
+                </ul>
+
+                <a href="https://cal.com/juan-ignacio-rivara/neuromarkai" class="nav-cta nav-transition" aria-label="Solicitar consulta gratuita de inteligencia artificial">Consulta Gratuita</a>
+                <button class="mobile-menu" id="mobile-menu" aria-label="Abrir menú de navegación" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <h1>E-commerce + IA: Un 40% Más de Ventas</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> 10 de Enero, 2025</span>
+                <span><i class="far fa-clock"></i> 8 min de lectura</span>
+                <span><i class="far fa-folder"></i> Casos de Estudio</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Main Content -->
+    <main class="article-main">
+        <div class="container">
+            <div class="article-content">
+                <p>En el competitivo mundo del e-commerce, la diferencia entre el éxito y el estancamiento a menudo reside en la capacidad de adaptarse y optimizar. Esta es la historia de cómo una tienda online de moda, "ModaElegante", se enfrentó a sus mayores desafíos y, gracias a una estrategia integral de inteligencia artificial de NeuroMarkAI, no solo superó sus metas, sino que redefinió lo que era posible en su sector.</p>
+
+                <h2>El Desafío: Un Funnel de Conversión Estancado</h2>
+                <p>ModaElegante era una marca consolidada con un tráfico web decente, pero sufría de problemas comunes en el e-commerce:</p>
+                <ul>
+                    <li><strong>Alta tasa de abandono del carrito:</strong> Más del 70% de los usuarios añadían productos al carrito pero no finalizaban la compra.</li>
+                    <li><strong>Bajo valor medio del pedido (AOV):</strong> Los clientes no compraban productos complementarios, limitando el potencial de cada venta.</li>
+                    <li><strong>Personalización inexistente:</strong> La experiencia de compra era genérica y no adaptada a los intereses individuales del usuario.</li>
+                    <li><strong>Soporte al cliente sobrecargado:</strong> El equipo de atención al cliente pasaba la mayor parte del tiempo respondiendo preguntas frecuentes.</li>
+                </ul>
+                <p>Sabían que necesitaban una solución que fuera más allá de las tácticas de marketing digital convencionales. Necesitaban inteligencia.</p>
+
+                <h2>La Solución de NeuroMarkAI: Un Ecosistema de IA</h2>
+                <p>Nuestro enfoque no fue implementar una única herramienta de IA, sino crear un ecosistema integrado que trabajara en cada punto crítico del viaje del cliente.</p>
+                
+                <h3>1. Motor de Recomendaciones de Producto con IA</h3>
+                <p>Implementamos un motor de recomendaciones que analiza el historial de navegación, las compras anteriores y el comportamiento en tiempo real del usuario. En lugar de mostrar "productos populares", muestra los productos que cada usuario individual tiene más probabilidades de comprar, aumentando drásticamente la relevancia y el AOV.</p>
+
+                <h3>2. Chatbot de Soporte Predictivo</h3>
+                <p>Desplegamos un chatbot entrenado con toda la base de conocimiento de ModaElegante, desde tallas y composiciones hasta políticas de devolución. Este chatbot puede resolver el 80% de las consultas de forma autónoma, liberando al equipo humano para centrarse en problemas complejos y en la proactividad comercial.</p>
+
+                <h3>3. Precio Dinámico e Inteligente</h3>
+                <p>Desarrollamos un sistema de precios dinámicos que ajusta el coste de los productos en función de la demanda, el stock disponible, el perfil del cliente e incluso la hora del día. Esto no solo maximizó los beneficios, sino que también ayudó a gestionar el inventario de manera más eficiente.</p>
+
+                <h2>La Implementación: Fases y Estrategia</h2>
+                <p>El proyecto se dividió en tres fases claras para asegurar una transición fluida y medir el impacto de cada cambio.</p>
+                <ul>
+                    <li><strong>Fase 1 - Análisis y Auditoría:</strong> Mapeamos todo el funnel de conversión e identificamos los puntos de fricción clave.</li>
+                    <li><strong>Fase 2 - Integración y Entrenamiento:</strong> Integramos las soluciones de IA con su plataforma Shopify y entrenamos los modelos con sus datos históricos.</li>
+                    <li><strong>Fase 3 - Optimización y Escalado:</strong> Lanzamos las nuevas funcionalidades y monitorizamos los KPIs para realizar ajustes finos en tiempo real.</li>
+                </ul>
+
+                <h2>Los Resultados: Más Allá de las Expectativas</h2>
+                <p>El impacto fue transformacional. En solo seis meses, ModaElegante no solo mejoró sus métricas, sino que transformó su modelo de negocio.</p>
+                
+                <div class="results-highlight">
+                    <h3>Resultados Clave</h3>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <div class="stat">+40%</div>
+                            <div class="description">Ventas Totales</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="stat">+25%</div>
+                            <div class="description">Valor Medio del Pedido (AOV)</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="stat">-50%</div>
+                            <div class="description">Tasa de Abandono</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="stat">-60%</div>
+                            <div class="description">Tickets de Soporte</div>
+                        </div>
+                    </div>
+                </div>
+
+                <blockquote class="testimonial">
+                    <p>"La IA no solo nos ayudó a vender más, sino que entendimos a nuestros clientes a un nivel que nunca antes fue posible. La inversión con NeuroMarkAI ha sido la más rentable que hemos hecho. Han sido un verdadero socio estratégico."</p>
+                    <footer>- <strong>CEO de ModaElegante</strong></footer>
+                </blockquote>
+
+                <h2>Conclusión: La IA no es Opcional, es Esencial</h2>
+                <p>El caso de ModaElegante es un claro ejemplo de que la inteligencia artificial ya no es un lujo para las grandes corporaciones, sino una herramienta poderosa y accesible para negocios de todos los tamaños. Las empresas que adopten la IA hoy no solo verán un aumento en sus ingresos, sino que construirán una ventaja competitiva insuperable para la próxima década.</p>
+                <p>El futuro del e-commerce es personalizado, predictivo y automatizado. La pregunta ya no es si puedes permitirte el lujo de tener IA, sino si puedes permitirte el lujo de no tenerla.</p>
+                
+                <!-- CTA al final del artículo -->
+                <div class="cta-end-article">
+                    <p>¿Quieres ver la estrategia completa que hizo posible este éxito?</p>
+                    <a href="../../vsl-exclusivo/" class="nav-cta">
+                        <i class="fas fa-play-circle"></i>
+                        Descubre nuestro VSL Exclusivo
+                    </a>
+                </div>
+            </div>
+            
+            <a href="../" class="back-to-blog">
+                <i class="fas fa-arrow-left"></i>
+                Volver al Blog
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sobre NeuroMarkAI</h3>
+                    <p>Somos una agencia especializada en implementar soluciones avanzadas de inteligencia artificial para empresas españolas que buscan liderar la transformación digital.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="../../index.html#servicios">Soluciones IA</a></li>
+                        <li><a href="../../index.html#testimonios">Casos de Éxito</a></li>
+                        <li><a href="../../index.html#contacto">Contacto</a></li>
+                        <li><a href="../../politica-privacidad/">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:contacto@neuromarkai.com">contacto@neuromarkai.com</a></li>
+                        <li><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+34678633949">+34 678 63 39 49</a></li>
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Vila-Real, Castellón, España</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 NeuroMarkAI. Todos los derechos reservados. | 
+                <a href="../../politica-privacidad/">Política de Privacidad</a> | 
+                <a href="../../politica-cookies/">Política de Cookies</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll
+            window.addEventListener('scroll', function() {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Menú móvil
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.getElementById('nav-links');
+            
+            if (mobileMenu && navLinks) {
+                mobileMenu.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    const icon = mobileMenu.querySelector('i');
+                    if (navLinks.classList.contains('active')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                        mobileMenu.setAttribute('aria-expanded', 'true');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        mobileMenu.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            // Cerrar menú al hacer clic
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (navLinks && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        const icon = mobileMenu.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        mobileMenu.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
