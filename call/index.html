@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  /* --- FUENTES E ICONOS --- */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+  /* --- VARIABLES & RESET --- */
+  :root {
+    --bg-dark: #0f172a;
+    --bg-card: #1e293b;
+    --accent-blue: #60a5fa;
+    --accent-purple: #a78bfa;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --glow: rgba(96, 165, 250, 0.15);
+  }
+
+  /* --- CONTENEDOR PRINCIPAL --- */
+  .neuromark-wrapper {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    overflow: hidden; /* Evita scroll horizontal indeseado */
+  }
+
+  /* --- ANIMACIONES --- */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulseGlow {
+    0% { box-shadow: 0 0 15px var(--glow); border-color: rgba(96, 165, 250, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(167, 139, 250, 0.3); border-color: rgba(167, 139, 250, 0.5); }
+    100% { box-shadow: 0 0 15px var(--glow); border-color: rgba(96, 165, 250, 0.3); }
+  }
+
+  .animate-enter {
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0; /* Estado inicial */
+  }
+  
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.5s; }
+
+  /* --- HEADER SECCIÓN --- */
+  .neuromark-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .neuromark-badge {
+    display: inline-block;
+    background: rgba(96, 165, 250, 0.1);
+    color: var(--accent-blue);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .neuromark-title {
+    font-size: 2.75rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 20px 0;
+    background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .neuromark-title span {
+    background: linear-gradient(to right, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .neuromark-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* --- CALENDARIO CONTAINER --- */
+  .calendar-frame {
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+    margin-bottom: 80px;
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+    height: 650px; /* Altura fija para evitar saltos */
+    position: relative;
+    /* Efecto de borde brillante sutil */
+    animation: pulseGlow 4s infinite ease-in-out;
+  }
+
+  /* --- TESTIMONIOS (GRID) --- */
+  .success-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+  }
+
+  .success-card {
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    padding: 30px;
+    border-radius: 16px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .success-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(96, 165, 250, 0.3);
+  }
+
+  /* Elemento decorativo "comillas" */
+  .success-card::before {
+    content: "“";
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 6rem;
+    color: rgba(255, 255, 255, 0.03);
+    font-family: serif;
+    line-height: 0;
+  }
+
+  .quote-text {
+    font-size: 1rem;
+    font-style: italic;
+    color: #e2e8f0;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+  }
+
+  .quote-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 1.1rem;
+  }
+
+  .author-info h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .author-info p {
+    margin: 2px 0 0 0;
+    font-size: 0.8rem;
+    color: var(--accent-blue);
+  }
+
+  .metrics-badge {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 4px 10px;
+    background: rgba(16, 185, 129, 0.15); /* Verde esmeralda suave */
+    color: #34d399;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .neuromark-title { font-size: 2rem; }
+    .neuromark-wrapper { padding: 40px 15px; }
+    .calendar-frame { height: 750px; } /* Más alto en móvil para que quepa todo */
+  }
+</style>
+</head>
+<body>
+
+<div class="neuromark-wrapper">
+  
+  <div class="neuromark-header animate-enter">
+    <span class="neuromark-badge">Consultoría Estratégica Gratuita</span>
+    <h2 class="neuromark-title">Automatiza tu Crecimiento con <span>Inteligencia Artificial</span></h2>
+    <p class="neuromark-subtitle">
+      En solo 30 minutos analizaremos tus cuellos de botella y te mostraremos cómo nuestros sistemas pueden ahorrarte horas y multiplicar tus ventas.
+    </p>
+  </div>
+
+  <div class="calendar-frame animate-enter delay-1">
+    <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-reunion"></div>
+    <script type="text/javascript">
+      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+      Cal("init", "reunion", {origin:"https://app.cal.com"});
+
+      Cal.ns.reunion("inline", {
+        elementOrSelector:"#my-cal-inline-reunion",
+        config: {"layout":"month_view", "theme":"dark"},
+        calLink: "neuromarkai/reunion",
+      });
+
+      Cal.ns.reunion("ui", {"hideEventTypeDetails":false,"layout":"month_view", "theme":"dark"});
+    </script>
+    </div>
+
+  <div class="animate-enter delay-2">
+    <div class="neuromark-header" style="margin-bottom: 30px;">
+      <h3 style="font-size: 1.8rem; font-weight: 600; color: white;">Resultados que hablan por sí solos</h3>
+      <p style="color: #94a3b8;">Empresas reales escalando con NeuroMarkAI</p>
+    </div>
+
+    <div class="success-grid">
+      
+      <div class="success-card">
+        <p class="quote-text">
+          "El CRM automatizado nos permitió predecir abandonos de carrito con 94% de precisión. Redujimos la tasa de abandono significativamente."
+        </p>
+        <div class="metrics-badge">🚀 +28% Ventas Recurrentes</div>
+        <div style="margin-top: 20px;" class="quote-author">
+          <div class="author-avatar">AM</div>
+          <div class="author-info">
+            <h4>Andrea Martínez</h4>
+            <p>Directora Marketing, eCommerce</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="success-card">
+        <p class="quote-text">
+          "Nuestra recepcionista virtual gestiona el 80% de las llamadas. Los clientes no notan la diferencia, y nosotros ganamos tiempo."
+        </p>
+        <div class="metrics-badge">⏱️ 40h Ahorradas/semana</div>
+        <div style="margin-top: 20px;" class="quote-author">
+          <div class="author-avatar">JR</div>
+          <div class="author-info">
+            <h4>Javier Ruiz</h4>
+            <p>Gerente, Clínica Dental</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="success-card">
+        <p class="quote-text">
+          "Los Social Ads predictivos revolucionaron nuestro ROI. La IA optimiza campañas en tiempo real con un coste mucho menor."
+        </p>
+        <div class="metrics-badge">📉 -62% Coste por Lead</div>
+        <div style="margin-top: 20px;" class="quote-author">
+          <div class="author-avatar">MG</div>
+          <div class="author-info">
+            <h4>Marta González</h4>
+            <p>Directora Digital, Inmobiliaria</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  <p style="text-align: center; margin-top: 50px; color: #475569; font-size: 0.9rem;">
+    © 2025 NeuroMarkAI - Tecnología Segura y Escalable
+  </p>
+
+</div>
+
+</body>
+</html>
