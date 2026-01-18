@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Y METADATOS -->
+    <title>El Futuro del SEO con IA Generativa | NeuroMarkAI</title>
+    <meta name="description" content="Descubre cómo la IA generativa está transformando el SEO. Adapta tu estrategia al nuevo Google y domina las búsquedas del futuro con nuestra guía experta.">
+    <meta name="keywords" content="futuro seo, ia generativa, sge, google ia, optimización web, marketing digital, neuroMarkAI">
+    <meta name="author" content="NeuroMarkAI">
+    <meta name="robots" content="index, follow">
+    
+    <!-- ENLACES CANÓNICOS -->
+    <link rel="canonical" href="https://neuromarkai.com/blog-ia/futuro-seo-ia-generativa/">
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ESTILOS -->
+    <style>
+        :root {
+            --primary: #5B21B6; /* Morado oscuro */
+            --primary-dark: #4C1D95;
+            --primary-light: #7C3AED;
+            --secondary: #1E40AF; /* Azul oscuro */
+            --secondary-dark: #1E3A8A;
+            --secondary-light: #3B82F6;
+            --accent: #F59E0B;
+            --bg-dark: #0f0f23;
+            --bg-darker: #050514;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --bg-card-hover: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(91, 33, 182, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(30, 64, 175, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: bgPulse 25s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 15, 35, 0.7);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+            -webkit-backdrop-filter: blur(30px);
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 15, 35, 0.98);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-bottom: 1px solid rgba(91, 33, 182, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 50%, var(--secondary) 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 0 20px rgba(91, 33, 182, 0.5));
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 50%, var(--secondary) 50%);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary) 50%, var(--secondary) 50%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(91, 33, 182, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: 0;
+        }
+
+        .nav-cta:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(91, 33, 182, 0.6);
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .mobile-menu:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+        
+        /* ARTICLE STYLES */
+        .article-header {
+            background: var(--bg-darker);
+            padding: 8rem 0 3rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 50%, var(--secondary) 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .article-main {
+            padding: 4rem 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 3rem 0 1.5rem 0;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .article-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 50%, var(--secondary) 50%);
+            border-radius: 2px;
+        }
+        
+        .article-content h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: var(--primary-light);
+        }
+
+        .article-content ul {
+            margin: 1.5rem 0 1.5rem 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .article-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: var(--bg-card);
+            border: 1px solid var(--primary-light);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .highlight-box h3 {
+            color: var(--text-primary);
+            margin-top: 0;
+        }
+
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            margin: 3rem 0;
+            padding: 1rem 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-to-blog:hover {
+            background: var(--bg-card-hover);
+            transform: translateX(-5px);
+        }
+        
+        /* FOOTER */
+        .footer {
+            background: var(--bg-darker);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0 1.5rem;
+            margin-top: 5rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--primary) 50%, var(--secondary) 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-section p,
+        .footer-section ul {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+            transition: var(--transition);
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-section a:hover::after {
+            width: 100%;
+        }
+
+        .footer-section li:hover {
+            transform: translateX(8px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(15, 15, 35, 0.98);
+                backdrop-filter: blur(30px);
+                -webkit-backdrop-filter: blur(30px);
+                padding: 2rem 1.5rem;
+                border-bottom: 1px solid var(--border);
+                gap: 1.5rem;
+                animation: slideDown 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .article-header {
+                padding: 6rem 0 2rem;
+            }
+            .article-main {
+                padding: 2rem 0;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Navegación principal">
+        <div class="container">
+            <div class="nav-container">
+                <a href="../../index.html" class="logo" aria-label="NeuroMarkAI - Ir al inicio">
+                    <i class="fas fa-brain" aria-hidden="true"></i>
+                    NeuroMarkAI
+                </a>
+
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="../../index.html#servicios" class="nav-transition">Soluciones IA</a></li>
+                    <li><a href="../../index.html#testimonios" class="nav-transition">Casos de Éxito</a></li>
+                    <li><a href="../../index.html#contacto" class="nav-transition">Contacto</a></li>
+                </ul>
+
+                <a href="/call/" class="nav-cta nav-transition" aria-label="Solicitar consulta gratuita de inteligencia artificial">Consulta Gratuita</a>
+                <button class="mobile-menu" id="mobile-menu" aria-label="Abrir menú de navegación" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <h1>El Futuro del SEO con IA Generativa</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> 5 de Enero, 2025</span>
+                <span><i class="far fa-clock"></i> 7 min de lectura</span>
+                <span><i class="far fa-folder"></i> Tendencias</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Main Content -->
+    <main class="article-main">
+        <div class="container">
+            <div class="article-content">
+                <p>El SEO está viviendo su mayor revolución desde la creación de Google. La llegada de la Inteligencia Artificial Generativa no es una simple mejora; es un cambio sísmico en cómo los usuarios buscan información y cómo Google presenta los resultados. Las estrategias que te llevaron al éxito ayer pueden ser obsoletas hoy. ¿Estás preparado para lo que viene?</p>
+
+                <h2>El Cambio de Paradigma: De las Palabras Clave a las Conversaciones</h2>
+                <p>Durante años, el SEO se centró en una batalla por las palabras clave. El objetivo era simple: aparecer en los primeros puestos de Google para términos específicos. Sin embargo, con la introducción del <strong>SGE (Search Generative Experience)</strong>, el panorama ha mutado.</p>
+                <p>El SGE no devuelve una simple lista de enlaces azules. En su lugar, ofrece una respuesta conversacional y directa, generada por IA, que sintetiza información de múltiples fuentes. El usuario ya no necesita hacer clic; obtiene su respuesta en la propia página de resultados. Esto cambia las reglas del juego por completo.</p>
+
+                <div class="highlight-box">
+                    <h3><i class="fas fa-lightbulb"></i> ¿Qué es el SGE?</h3>
+                    <p>Es la nueva interfaz de búsqueda de Google, impulsada por IA, que proporciona respuestas complejas y resumenes directamente en la página de resultados, reduciendo la necesidad de que los usuarios visiten múltiples sitios web.</p>
+                </div>
+
+                <h2>Los Nuevos Pilares del SEO en la Era de la IA</h2>
+                <p>Para prosperar en este nuevo ecosistema, debemos dejar de pensar en "palabras clave" y empezar a pensar en "temas" y "entidades". La IA de Google es mucho mejor que los humanos para entender el contexto, la intención y la autoridad sobre un tema completo.</p>
+                
+                <h3>1. Autoridad Temática (Topical Authority)</h3>
+                <p>Ya no basta con tener un artículo bien optimizado para "mejor cafetera de Madrid". Google ahora evalúa tu conocimiento global sobre el "mundo del café". ¿Cubres el origen, los métodos de tueste, los tipos de granos, las máquinas, la cultura del café? La IA premia a quienes demuestran ser una autoridad indiscutible en un tema.</p>
+
+                <h3>2. Contenido Útil y Original a Escala</h3>
+                <p>La IA puede generar contenido a una velocidad vertiginosa, pero también es experta en detectar contenido genérico, de baja calidad o plagiado. El valor humano ahora reside en la <strong>perspectiva única, los datos originales y la experiencia real</strong> que una IA no puede replicar. Tu contenido debe responder preguntas que nadie más ha contestado de tu manera.</p>
+
+                <h3>3. E-E-A-T (Experiencia, Pericia, Autoridad, Confianza) Magnificado</h3>
+                <p>El concepto de E-E-A-T no es nuevo, pero la IA lo ha llevado al siguiente nivel. Google puede analizar quién es el autor de un contenido, cuál es su historial, qué otros dicen sobre esa persona o marca, y si la información es respaldada por fuentes fiables. La confianza es la nueva moneda del SEO.</p>
+
+                <h2>Cómo Adaptar tu Estrategia de SEO Hoy Mismo</h2>
+                <p>Esperar a que la IA domine por completo es un error. La adaptación debe ser inmediata. Aquí tienes un plan de acción práctico:</p>
+
+                <ul>
+                    <li><strong>Auditoría de Contenido Temático:</strong> Mapea todos los subtemos relacionados con tu nicho. Identifica las lagunas en tu contenido y crea artículos para cubrirlas. Usa la IA para generar ideas y esquemas, pero añade tu valor humano.</li>
+                    <li><strong>Optimización para Entidades y Schema Markup:</strong> Utiliza datos estructurados (Schema.org) para ayudar a la IA a entender quién eres, qué ofreces y cómo te relacionas con otras entidades en tu campo. Esto es crucial para ser citado en las respuestas generativas.</li>
+                    <li><strong>Crea Contenido que Responda Preguntas:</strong> Piensa como tu cliente. ¿Qué preguntas complejas tiene sobre tu sector? Crea artículos, guías y tutoriales que sean la respuesta definitiva a esas preguntas. El formato de Preguntas Frecuentes (FAQ) es más importante que nunca.</li>
+                    <li><strong>Construye una Marca Personal Fuerte:</strong> La IA identifica y valora a los expertos. Participa en podcasts, colabora con otros líderes de tu sector, sé activo en redes profesionales. Tu nombre debe estar asociado a la solución de problemas en tu área.</li>
+                </ul>
+
+                <h2>El Rol Humano en un Mundo Dominado por la IA</h2>
+                <p>Puede sonar aterrador, pero la IA no sustituye al experto; lo <strong>potencia</strong>. Tu trabajo no es competir con la IA en velocidad o volumen, sino en usarla como tu asistente estratégico. Delega las tareas repetitivas (investigación de palabras clave, creación de borradores, análisis de la competencia) y dedica tu tiempo a lo que realmente importa: la estrategia, la creatividad y la conexión humana.</p>
+                
+                <p>El futuro del SEO no es sobre optimizar para algoritmos; es sobre optimizar para la <strong>experiencia y el conocimiento del usuario</strong>, con la IA como la gran mediadora. Las empresas que entiendan esta nueva dinámica y la abracen no solo sobrevivirán, sino que liderarán la próxima década del marketing digital.</p>
+
+                <p>¿Listo para asegurar que tu negocio no solo sea encontrado, sino también <strong>recomendado</strong> por la nueva generación de buscadores? <a href="../../vsl-exclusivo" style="color: var(--primary-light); font-weight: 600;">Accede al Video Exclusivo de NeuroMarkAI</a> y prepara tu web para el futuro.</p>
+            </div>
+            
+            <a href="../" class="back-to-blog">
+                <i class="fas fa-arrow-left"></i>
+                Volver al Blog
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sobre NeuroMarkAI</h3>
+                    <p>Somos una agencia especializada en implementar soluciones avanzadas de inteligencia artificial para empresas españolas que buscan liderar la transformación digital.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="../../index.html#servicios">Soluciones IA</a></li>
+                        <li><a href="../../index.html#testimonios">Casos de Éxito</a></li>
+                        <li><a href="../../index.html#contacto">Contacto</a></li>
+                        <li><a href="../../politica-privacidad/">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:contacto@neuromarkai.com">contacto@neuromarkai.com</a></li>
+                        <li><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+34678633949">+34 678 63 39 49</a></li>
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Vila-Real, Castellón, España</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 NeuroMarkAI. Todos los derechos reservados. | 
+                <a href="../../politica-privacidad/">Política de Privacidad</a> | 
+                <a href="../../politica-cookies/">Política de Cookies</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll
+            window.addEventListener('scroll', function() {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Menú móvil
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.getElementById('nav-links');
+            
+            if (mobileMenu && navLinks) {
+                mobileMenu.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    const icon = mobileMenu.querySelector('i');
+                    if (navLinks.classList.contains('active')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                        mobileMenu.setAttribute('aria-expanded', 'true');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        mobileMenu.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            // Cerrar menú al hacer clic
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (navLinks && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        const icon = mobileMenu.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        mobileMenu.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
