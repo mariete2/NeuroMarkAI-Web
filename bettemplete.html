@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bet365 Generator Final</title>
+    <style>
+        :root {
+            --bg-page: #0b0b0b;
+            --bg-card: #282828;
+            --btn-bg: #333333;
+            --bet-green: #00A67A;
+            --neon: #00ffa3;
+            --text-white: #ffffff;
+            --text-grey: #919191;
+            --border-line: #383838;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 50px;
+        }
+
+        /* --- PANEL DE CONTROL --- */
+        #ui-panel {
+            background: #1a1a1a;
+            width: 100%;
+            padding: 15px;
+            border-bottom: 2px solid var(--bet-green);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .ui-group { display: flex; flex-direction: column; gap: 4px; }
+        .ui-group label { font-size: 10px; text-transform: uppercase; color: var(--bet-green); font-weight: bold; }
+        .ui-group select, .ui-group input { background: #2a2a2a; border: 1px solid #444; color: white; padding: 6px; border-radius: 4px; font-size: 13px; outline: none; }
+        .btn-capture { background: var(--bet-green); color: #002b20; font-weight: bold; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; align-self: flex-end; }
+
+        /* --- TARJETA --- */
+        #capture-area { margin-top: 40px; }
+
+        .bet-card {
+            background-color: var(--bg-card);
+            width: 375px;
+            color: var(--text-white);
+            border-radius: 2px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            overflow: hidden;
+        }
+
+        /* Cabecera: IMPORTE (Stake) + Tipo */
+        .header { padding: 16px; border-bottom: 1px solid var(--border-line); }
+        .header-top { display: flex; align-items: center; gap: 8px; }
+        .header-val { color: var(--neon); font-size: 24px; font-weight: 800; }
+        .header-type { color: var(--neon); font-size: 21px; font-weight: 700; }
+        
+        /* Color verde si es pendiente */
+        .bet-card.status-pending .header-val, 
+        .bet-card.status-pending .header-type { color: var(--bet-green); }
+
+        .actions { display: flex; padding: 12px 16px; gap: 10px; }
+        .act-btn { background: var(--btn-bg); color: #fff; padding: 9px; border-radius: 4px; font-size: 14px; font-weight: 600; flex: 1; text-align: center; }
+
+        /* Picks */
+        .pick-block { padding: 15px 16px 5px 16px; }
+        .p-row { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+        .status-icon { font-size: 16px; font-weight: bold; width: 16px; text-align: center; }
+        .status-won .status-icon { color: var(--neon); }
+        .status-pending .status-icon { width: 8px; height: 8px; border: 1.5px solid #777; border-radius: 50%; margin-left: 4px; margin-right: 4px; }
+
+        .sel-name { font-size: 18px; font-weight: 700; }
+        .sel-odds { font-size: 18px; font-weight: 700; margin-left: 4px; }
+        .market { color: var(--text-grey); font-size: 14px; margin-left: 30px; margin-bottom: 10px; }
+
+        .match-box { margin-left: 30px; padding-left: 12px; border-left: 1.5px solid #444; display: flex; justify-content: space-between; align-items: flex-start; }
+        .teams { font-size: 15px; line-height: 1.6; color: #fff; }
+        
+        .score-col { display: none; flex-direction: column; gap: 4px; }
+        .date-col { display: flex; flex-direction: column; text-align: right; color: var(--text-grey); font-size: 12px; line-height: 1.8; }
+        
+        .bet-card.status-won .score-col { display: flex; }
+        .bet-card.status-won .date-col { display: none; }
+        .pts { background: #333; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; border-radius: 1px; }
+
+        /* FOOTER: ÚNICA LÍNEA DIVISORIA */
+        .footer-line { border-top: 1px solid var(--border-line); padding: 18px 16px; display: flex; justify-content: space-between; margin-top: 10px; }
+        .f-group { display: flex; flex-direction: column; }
+        .f-lbl { color: var(--text-grey); font-size: 13px; margin-bottom: 6px; }
+        .f-val { font-size: 21px; font-weight: 800; }
+        .f-val.neon { color: var(--neon); }
+
+        /* Botones / Barras inferiores */
+        .bottom-area { padding: 0 16px 16px 16px; }
+        .btn-cashout { background: #21a559; color: #002b20; text-align: center; padding: 12px; border-radius: 4px; font-weight: 800; font-size: 16px; }
+
+        .won-bar { display: none; background: #1a1a1a; padding: 18px; justify-content: center; align-items: center; gap: 12px; border-top: 1px solid var(--border-line); }
+        .status-won .won-bar { display: flex; }
+        .status-won .bottom-area { display: none; }
+        
+        .circle-win { border: 2px solid var(--neon); color: var(--neon); border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
+        .win-amt-final { color: var(--neon); font-size: 24px; font-weight: 800; }
+        .win-label-final { color: var(--neon); font-size: 22px; font-weight: 700; }
+
+        [contenteditable="true"] { outline: none; }
+    </style>
+</head>
+<body>
+
+    <div id="ui-panel">
+        <div class="ui-group">
+            <label>Tipo</label>
+            <select id="typeSelect" onchange="update()">
+                <option value="Simple">Simple</option>
+                <option value="Doble">Doble</option>
+                <option value="Triple">Triple</option>
+                <option value="Combinada">Combinada</option>
+                <option value="Crear apuesta">Crear apuesta</option>
+            </select>
+        </div>
+        <div class="ui-group">
+            <label>Estado</label>
+            <select id="statusSelect" onchange="update()">
+                <option value="won">Ganada</option>
+                <option value="pending">Pendiente</option>
+            </select>
+        </div>
+        <div class="ui-group">
+            <label>Nº Picks</label>
+            <input type="number" id="numEvents" value="1" min="1" max="8" oninput="update()">
+        </div>
+        <button class="btn-capture" onclick="window.print()">GENERAR CAPTURA</button>
+    </div>
+
+    <div id="capture-area"></div>
+
+    <script>
+        function update() {
+            const type = document.getElementById('typeSelect').value;
+            const status = document.getElementById('statusSelect').value;
+            const num = parseInt(document.getElementById('numEvents').value);
+            const area = document.getElementById('capture-area');
+
+            let content = '';
+
+            if (type === 'Crear apuesta') {
+                content = `
+                    <div class="pick-block">
+                        <div class="p-row">
+                            <div class="status-icon">${status === 'won' ? '✓' : ''}</div>
+                            <span class="sel-name" contenteditable="true">Partido Builder</span>
+                            <span class="sel-odds" contenteditable="true">4.50</span>
+                        </div>
+                        <div style="margin-left:30px; color:var(--text-grey); font-size:14px; line-height:1.8;">
+                            <div contenteditable="true">• Selección 1</div>
+                            <div contenteditable="true">• Selección 2</div>
+                        </div>
+                    </div>`;
+            } else {
+                for (let i = 1; i <= num; i++) {
+                    content += `
+                        <div class="pick-block">
+                            <div class="p-row">
+                                <div class="status-icon">${status === 'won' ? '✓' : ''}</div>
+                                <span class="sel-name" contenteditable="true">Villarreal</span>
+                                <span class="sel-odds" contenteditable="true">1.77</span>
+                            </div>
+                            <div class="market" contenteditable="true">Resultado final</div>
+                            <div class="match-box">
+                                <div class="teams"><div contenteditable="true">Villarreal</div><div contenteditable="true">Alavés</div></div>
+                                <div class="score-col"><div class="pts" contenteditable="true">2</div><div class="pts" contenteditable="true">1</div></div>
+                                <div class="date-col"><div contenteditable="true">Hoy</div><div contenteditable="true">21:00</div></div>
+                            </div>
+                        </div>`;
+                }
+            }
+
+            area.innerHTML = `
+                <div class="bet-card status-${status}">
+                    <div class="header">
+                        <div class="header-top">
+                            <span class="header-val header-stake-sync">0,00€</span>
+                            <span class="header-type" contenteditable="true">${type}</span>
+                        </div>
+                    </div>
+                    <div class="actions"><div class="act-btn">Reutilizar selecciones</div><div class="act-btn">Compartir</div></div>
+                    ${content}
+                    <div class="footer-line">
+                        <div class="f-group"><span class="f-lbl">Imp:</span><span class="f-val stake-editable" contenteditable="true">2.000,00€</span></div>
+                        <div class="f-group" style="text-align:right"><span class="f-lbl">Ganancias</span><span class="f-val calc-win ${status === 'won' ? 'neon' : ''}">3.540,00€</span></div>
+                    </div>
+                    <div class="bottom-area"><div class="btn-cashout">Cerrar apuesta <span class="header-stake-sync">2.000,00€</span></div></div>
+                    <div class="won-bar"><div class="circle-win">✓</div><div class="win-amt-final calc-win">3.540,00€</div><div class="win-label-final">Ganancias</div></div>
+                </div>`;
+            calculate();
+        }
+
+        function calculate() {
+            const card = document.querySelector('.bet-card');
+            if(!card) return;
+
+            // Calcular Cuota Total
+            let m = 1;
+            card.querySelectorAll('.sel-odds').forEach(o => m *= parseFloat(o.innerText.replace(',', '.')) || 1);
+            
+            // Obtener Importe (Stake)
+            let sRaw = card.querySelector('.stake-editable').innerText;
+            let s = parseFloat(sRaw.replace(/\./g, '').replace(',', '.').replace('€', '')) || 0;
+            
+            // Formatear
+            let res = (s * m).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '€';
+            let stk = s.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '€';
+
+            // Sincronizar importes (Cabecera, Footer e inferior)
+            card.querySelectorAll('.header-stake-sync').forEach(el => el.innerText = stk);
+            
+            // Sincronizar ganancias calculadas
+            card.querySelectorAll('.calc-win').forEach(el => el.innerText = res);
+        }
+
+        document.addEventListener('input', calculate);
+        update();
+    </script>
+</body>
+</html>
